@@ -1,5 +1,6 @@
 package com.dskora.circuitbreaker.account;
 
+import com.dskora.circuitbreaker.account.dto.BankAccountDto;
 import com.dskora.circuitbreaker.account.service.BankAccountService;
 import com.dskora.circuitbreaker.account.domain.BankAccount;
 import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
@@ -39,7 +40,7 @@ public class BankAccountIntegrationTests {
 
     @Test
     public void testCreateAccount() throws Exception {
-        BankAccount bankAccount = account();
+        BankAccountDto bankAccount = account();
 
         when(bankAccountService.createAccount(any(CreateAccountDto.class))).thenReturn(bankAccount);
         this.mockMvc
@@ -55,7 +56,7 @@ public class BankAccountIntegrationTests {
 
     @Test
     public void testFindAccounts() throws Exception {
-        BankAccount bankAccount = account();
+        BankAccountDto bankAccount = account();
 
         when(bankAccountService.findAccounts()).thenReturn(Arrays.asList(bankAccount));
         this.mockMvc
@@ -67,9 +68,9 @@ public class BankAccountIntegrationTests {
 
     @Test
     public void testFindAccountById() throws Exception {
-        BankAccount bankAccount = account();
+        BankAccountDto bankAccount = account();
 
-        when(bankAccountService.findAccountById(any(String.class))).thenReturn(bankAccount);
+        when(bankAccountService.findAccountById(any(UUID.class))).thenReturn(bankAccount);
         this.mockMvc
                 .perform(get("/accounts/" + UUID.randomUUID().toString()))
                 .andExpect(jsonPath("firstname").value(bankAccount.getFirstname()))
@@ -85,8 +86,8 @@ public class BankAccountIntegrationTests {
         }
     }
 
-    private static BankAccount account()
+    private static BankAccountDto account()
     {
-        return new BankAccount(UUID.randomUUID(), Faker.instance().name().firstName(), Faker.instance().name().lastName(), BigDecimal.valueOf(Faker.instance().random().nextLong()));
+        return new BankAccountDto(UUID.randomUUID(), Faker.instance().name().firstName(), Faker.instance().name().lastName(), BigDecimal.valueOf(Faker.instance().random().nextLong()));
     }
 }

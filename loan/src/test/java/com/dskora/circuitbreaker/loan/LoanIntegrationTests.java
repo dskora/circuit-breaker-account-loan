@@ -1,6 +1,6 @@
 package com.dskora.circuitbreaker.loan;
 
-import com.dskora.circuitbreaker.loan.dto.LoanEligibility;
+import com.dskora.circuitbreaker.loan.vo.LoanEligibility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
