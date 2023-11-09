@@ -28,3 +28,4 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:8081
+      -
