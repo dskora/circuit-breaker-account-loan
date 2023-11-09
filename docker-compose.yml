@@ -1,0 +1,30 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=banking
+      - MYSQL_USER=demo
+      - MYSQL_PASSWORD=demo
+    ports:
+      - "3307:3306"
+
+  account:
+    container_name: account
+    build:
+      context: account/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - loan
+
+  loan:
+    container_name: loan
+    build:
+      context: loan/
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
