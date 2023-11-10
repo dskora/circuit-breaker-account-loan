@@ -28,7 +28,10 @@ public class BankAccountController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public BankAccountDto getAccount(@PathVariable("id") String id) {
-        return this.accountService.findAccountById(UUID.fromString(id));
+        BankAccountDto bankAccountDto = this.accountService.findAccountById(UUID.fromString(id));
+        bankAccountDto.setLoanEligibility(this.accountService.getEligibility(bankAccountDto.getBalance()));
+
+        return bankAccountDto;
     }
 
     @PostMapping()

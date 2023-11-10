@@ -4,6 +4,7 @@ import com.dskora.circuitbreaker.account.dto.BankAccountDto;
 import com.dskora.circuitbreaker.account.service.BankAccountService;
 import com.dskora.circuitbreaker.account.domain.BankAccount;
 import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
+import com.dskora.circuitbreaker.loan.vo.NotEligibleForLoan;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
@@ -88,6 +89,6 @@ public class BankAccountIntegrationTests {
 
     private static BankAccountDto account()
     {
-        return new BankAccountDto(UUID.randomUUID(), Faker.instance().name().firstName(), Faker.instance().name().lastName(), BigDecimal.valueOf(Faker.instance().random().nextLong()));
+        return new BankAccountDto(UUID.randomUUID(), Faker.instance().name().firstName(), Faker.instance().name().lastName(), BigDecimal.valueOf(Faker.instance().random().nextLong()), new NotEligibleForLoan());
     }
 }

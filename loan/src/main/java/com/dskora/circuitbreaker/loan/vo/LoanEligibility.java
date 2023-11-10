@@ -1,17 +1,19 @@
 package com.dskora.circuitbreaker.loan.vo;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class LoanEligibility {
     public static BigDecimal MIN_ACCOUNT_BALANCE_FOR_LOAN = BigDecimal.valueOf(1000);
 
-    protected final BigDecimal maxAmount;
-    protected final int maxMonthsTerm;
+    protected BigDecimal maxAmount;
+    protected int maxMonthsTerm;
 
     protected LoanEligibility(BigDecimal maxAmount, int maxMonthsTerm) {
         this.maxAmount = maxAmount;
@@ -24,5 +26,10 @@ public class LoanEligibility {
             : new NotEligibleForLoan();
 
         return eligibility;
+    }
+
+    public boolean isEligible()
+    {
+        return this.maxAmount.compareTo(BigDecimal.ZERO) > 0;
     }
 }

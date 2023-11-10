@@ -1,5 +1,6 @@
 package com.dskora.circuitbreaker.account.dto;
 
+import com.dskora.circuitbreaker.loan.vo.LoanEligibility;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,5 @@ public class BankAccountDto {
     private String firstname;
     private String surname;
     private BigDecimal balance;
+    private LoanEligibility loanEligibility;
 }

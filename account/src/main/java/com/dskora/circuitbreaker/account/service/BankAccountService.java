@@ -4,6 +4,11 @@ import com.dskora.circuitbreaker.account.domain.BankAccount;
 import com.dskora.circuitbreaker.account.dto.BankAccountDto;
 import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
 import com.dskora.circuitbreaker.account.repository.BankAccountRepository;
+import com.dskora.circuitbreaker.loan.dto.LoanEligibilityRequestDto;
+import com.dskora.circuitbreaker.loan.vo.LoanEligibility;
+import com.dskora.circuitbreaker.loan.vo.MissingEligibility;
+import com.dskora.circuitbreaker.loan.vo.NotEligibleForLoan;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
@@ -41,17 +46,16 @@ public class BankAccountService {
     }
 
     public BankAccountDto findAccountById(UUID id) {
-        BankAccount bankAccount = this.bankAccountRepository.getById(id);
-        BankAccountDto bankAccountDto = this.convert(bankAccount);
-        RestTemplate restTemplate = new RestTemplate();
-        Map<String, BigDecimal> loanPostData = new HashMap();
-        loanPostData.put("balance", BigDecimal.valueOf(2000));
-        Map response = restTemplate.postForObject("http://localhost:8081/loans/eligibility", loanPostData, Map.class);
-        if (response.get("maxAmount") != null) {
-            System.out.println(response);
-        }
+        return this.convert(this.bankAccountRepository.getById(id));
+    }
 
-        return bankAccountDto;
+    @CircuitBreaker(name="loanEligibilityCheck", fallbackMethod = "loanEligibilityServiceFallback")
+    public LoanEligibility getEligibility(BigDecimal balance) {
+        return new RestTemplate().postForObject("http://localhost:8081/loans/eligibility", new LoanEligibilityRequestDto(balance), LoanEligibility.class);
+    }
+
+    private LoanEligibility loanEligibilityServiceFallback(Exception e) {
+        return new MissingEligibility();
     }
 
     private BankAccountDto convert(BankAccount account) {
