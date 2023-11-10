@@ -1,4 +1,4 @@
-package com.dskora.circuitbreaker.loan.dto;
+package com.dskora.circuitbreaker.api.dto;
 
 import lombok.*;
 

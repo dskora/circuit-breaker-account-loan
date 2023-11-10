@@ -1,4 +1,4 @@
-package com.dskora.circuitbreaker.loan.vo;
+package com.dskora.circuitbreaker.api.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

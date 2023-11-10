@@ -1,10 +1,9 @@
 package com.dskora.circuitbreaker.account;
 
-import com.dskora.circuitbreaker.account.dto.BankAccountDto;
+import com.dskora.circuitbreaker.api.dto.BankAccountDto;
 import com.dskora.circuitbreaker.account.service.BankAccountService;
-import com.dskora.circuitbreaker.account.domain.BankAccount;
-import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
-import com.dskora.circuitbreaker.loan.vo.NotEligibleForLoan;
+import com.dskora.circuitbreaker.api.dto.CreateAccountDto;
+import com.dskora.circuitbreaker.api.vo.NotEligibleForLoan;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;

@@ -1,24 +1,20 @@
 package com.dskora.circuitbreaker.account.service;
 
 import com.dskora.circuitbreaker.account.domain.BankAccount;
-import com.dskora.circuitbreaker.account.dto.BankAccountDto;
-import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
 import com.dskora.circuitbreaker.account.repository.BankAccountRepository;
-import com.dskora.circuitbreaker.loan.dto.LoanEligibilityRequestDto;
-import com.dskora.circuitbreaker.loan.vo.LoanEligibility;
-import com.dskora.circuitbreaker.loan.vo.MissingEligibility;
-import com.dskora.circuitbreaker.loan.vo.NotEligibleForLoan;
+import com.dskora.circuitbreaker.api.dto.BankAccountDto;
+import com.dskora.circuitbreaker.api.dto.CreateAccountDto;
+import com.dskora.circuitbreaker.api.dto.LoanEligibilityRequestDto;
+import com.dskora.circuitbreaker.api.vo.LoanEligibility;
+import com.dskora.circuitbreaker.api.vo.MissingEligibility;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -26,10 +22,6 @@ import java.util.stream.Collectors;
 public class BankAccountService {
     @Autowired
     BankAccountRepository bankAccountRepository;
-
-
-    @Autowired
-    private CircuitBreakerFactory circuitBreakerFactory;
 
     public List<BankAccountDto> findAccounts() {
         return this.bankAccountRepository.findAll()

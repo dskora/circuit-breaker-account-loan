@@ -1,6 +1,6 @@
-package com.dskora.circuitbreaker.account.dto;
+package com.dskora.circuitbreaker.api.dto;
 
-import com.dskora.circuitbreaker.loan.vo.LoanEligibility;
+import com.dskora.circuitbreaker.api.vo.LoanEligibility;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

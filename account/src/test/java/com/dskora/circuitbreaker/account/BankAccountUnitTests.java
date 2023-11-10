@@ -1,6 +1,6 @@
 package com.dskora.circuitbreaker.account;
 
-import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
+import com.dskora.circuitbreaker.api.dto.CreateAccountDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

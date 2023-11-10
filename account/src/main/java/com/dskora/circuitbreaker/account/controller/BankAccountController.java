@@ -1,9 +1,8 @@
 package com.dskora.circuitbreaker.account.controller;
 
-import com.dskora.circuitbreaker.account.domain.BankAccount;
-import com.dskora.circuitbreaker.account.dto.BankAccountDto;
-import com.dskora.circuitbreaker.account.dto.CreateAccountDto;
 import com.dskora.circuitbreaker.account.service.BankAccountService;
+import com.dskora.circuitbreaker.api.dto.BankAccountDto;
+import com.dskora.circuitbreaker.api.dto.CreateAccountDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

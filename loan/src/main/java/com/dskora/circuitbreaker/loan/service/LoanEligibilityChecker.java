@@ -1,9 +1,9 @@
 package com.dskora.circuitbreaker.loan.service;
 
-import com.dskora.circuitbreaker.loan.vo.EligibleForLoan;
-import com.dskora.circuitbreaker.loan.vo.LoanEligibility;
-import com.dskora.circuitbreaker.loan.dto.LoanEligibilityRequestDto;
-import com.dskora.circuitbreaker.loan.vo.NotEligibleForLoan;
+import com.dskora.circuitbreaker.api.vo.EligibleForLoan;
+import com.dskora.circuitbreaker.api.vo.LoanEligibility;
+import com.dskora.circuitbreaker.api.dto.LoanEligibilityRequestDto;
+import com.dskora.circuitbreaker.api.vo.NotEligibleForLoan;
 import org.springframework.stereotype.Service;
 
 @Service
