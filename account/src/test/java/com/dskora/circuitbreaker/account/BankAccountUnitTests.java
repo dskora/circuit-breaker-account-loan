@@ -2,13 +2,13 @@ package com.dskora.circuitbreaker.account;
 
 import com.dskora.circuitbreaker.api.dto.CreateAccountDto;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 public class BankAccountUnitTests {
     @Test
     public void testAccountRequest() {

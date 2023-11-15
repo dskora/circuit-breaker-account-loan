@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 
+import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -28,19 +29,17 @@ public class LoanIntegrationTests {
     public void testLoanEligibility() throws Exception {
         this.mockMvc
             .perform(post("/loans/eligibility")
-                .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .content("{\"balance\": \"" + LoanEligibility.MIN_ACCOUNT_BALANCE_FOR_LOAN.add(BigDecimal.valueOf(1)).toString() + "\"}")
             )
-            .andExpect(jsonPath("maxAmount").exists());
+            .andExpect(jsonPath("eligible").value(true));
 
         this.mockMvc
             .perform(post("/loans/eligibility")
-                .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .content("{\"balance\": \"" + LoanEligibility.MIN_ACCOUNT_BALANCE_FOR_LOAN.subtract(BigDecimal.valueOf(1)).toString() + "\"}")
             )
-            .andExpect(jsonPath("maxAmount").doesNotExist());
+            .andExpect(jsonPath("eligible").value(false));
     }
 
     private static String asJsonString(final Object obj) {

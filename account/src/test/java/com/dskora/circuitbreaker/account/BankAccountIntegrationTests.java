@@ -1,18 +1,24 @@
 package com.dskora.circuitbreaker.account;
 
+import com.dskora.circuitbreaker.account.controller.BankAccountController;
 import com.dskora.circuitbreaker.api.dto.BankAccountDto;
 import com.dskora.circuitbreaker.account.service.BankAccountService;
 import com.dskora.circuitbreaker.api.dto.CreateAccountDto;
 import com.dskora.circuitbreaker.api.vo.NotEligibleForLoan;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -26,12 +32,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@WebMvcTest(controllers = BankAccountController.class)
 public class BankAccountIntegrationTests {
-    @LocalServerPort
-    private int port;
-
     @Autowired
     private MockMvc mockMvc;
 
