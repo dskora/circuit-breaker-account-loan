@@ -1,7 +1,7 @@
 # Hysterix account loan demo
 
 ## Getting started
-Many of us occasionally come across a loan possibility in our bank application, if we meet special criteria.
+Many of us occasionally come across a loan possibility in our bank application, if we meet a special criteria.
 Let's imaging we have a loan microservice, which allow us to take a loan, but display nothing if service is not running.
 
 ## Prerequisite
@@ -21,7 +21,8 @@ mvn clean install
 docker-compose up -d
 ```
 
-### Test steps (1)
+## Testing
+### Step (1)
 
 ```shell script
 curl -X POST localhost:8081/loans/eligibility -d '{"balance": "20000"}' -H "Content-Type: application/json"
@@ -30,7 +31,7 @@ curl -X POST localhost:8080/accounts -d '{"firstname": "Andrew", "surname": "Had
 curl -X GET localhost:8080/accounts
 ```
 
-### Test steps (2) - Circuit Open State
+### Step (2) - Circuit Open State
 Get IDs from localhost:8080/accounts
 ```shell script
 docker-compose stop loan
@@ -40,7 +41,7 @@ curl -X GET localhost:8080/accounts/{id}
 curl -X GET localhost:8080/actuator/health
 ```
 
-### Test steps (2) - Circuit Half Open State
+### Step (2) - Circuit Half Open State
 Get IDs from localhost:8080/accounts
 ```shell script
 docker-compose up loan
@@ -50,7 +51,7 @@ curl -X GET localhost:8080/accounts/{id}
 curl -X GET localhost:8080/actuator/health
 ```
 
-### Test steps (3) - Circuit Closed State
+### Step (3) - Circuit Closed State
 Get IDs from localhost:8080/accounts
 ```shell script
 curl -X GET localhost:8080/accounts/{id}

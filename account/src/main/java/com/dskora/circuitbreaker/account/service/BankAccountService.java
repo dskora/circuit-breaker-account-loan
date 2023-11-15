@@ -43,7 +43,7 @@ public class BankAccountService {
 
     @CircuitBreaker(name="loanEligibilityCheck", fallbackMethod = "loanEligibilityServiceFallback")
     public LoanEligibility getEligibility(BigDecimal balance) {
-        return new RestTemplate().postForObject("http://localhost:8081/loans/eligibility", new LoanEligibilityRequestDto(balance), LoanEligibility.class);
+        return new RestTemplate().postForObject("http://loan:8081/loans/eligibility", new LoanEligibilityRequestDto(balance), LoanEligibility.class);
     }
 
     private LoanEligibility loanEligibilityServiceFallback(Exception e) {
